@@ -85,7 +85,8 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found:  GetNextPerson does not re-enqueue people with infinite turns (Turns <= 0).
+    // The condition "Turns > 1" prevents Tim from being added back to the queue when Turns = 0.
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -116,7 +117,8 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: GetNextPerson does not re-enqueue people with infinite turns (Turns <= 0).
+    // The condition "Turns > 1" prevents Tim from being added back to the queue when Turns = -3.
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
